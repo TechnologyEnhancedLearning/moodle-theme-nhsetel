@@ -67,23 +67,37 @@
         {{> theme_nhsetel/header }}
     {{/ output.get_global_header_data }}
 
-    {{#courseindex}}
-        {{< theme_boost/drawer }}
-            {{$id}}theme_boost-drawers-courseindex{{/id}}
-            {{$drawerheadercontent}}
-                {{> theme_nhsetel/courseindexdrawercontrols}}
-            {{/drawerheadercontent}}
-            {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
-            {{$drawercontent}}
+    {{! NEW WRAPPER: Encapsulates the columns below the header }}
+    <div class="nhs-main-layout nhsuk-width-container">
+
+{{#courseindex}}
+        <div id="nhs-courseindex-sidebar" 
+     class="show drawer drawer-left nhs-static-drawer {{#courseindexopen}}show{{/courseindexopen}}" 
+     data-region="fixed-drawer" 
+     data-preference="drawer-open-index" 
+     data-state="show-drawer-left" 
+     tabindex="-1">       
+            <div class="drawer-header py-3">         
+                <button class="btn drawertoggle icon-no-margin" 
+                    data-toggler="drawers" 
+                    data-action="closedrawer" 
+                    data-target="nhs-courseindex-sidebar" 
+                    title="Close course index"
+                    aria-label="Close course index">
+                    <i class="icon fa fa-xmark fa-fw"></i>
+                </button>
+            </div>
+
+           
+            
+            <div class="drawercontent p-3">
                 {{{output.page_heading}}}
                 {{{courseindex}}}
-            {{/drawercontent}}
-            {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
-            {{$drawerstate}}show-drawer-left{{/drawerstate}}
-            {{$tooltipplacement}}right{{/tooltipplacement}}
-            {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
-        {{/ theme_boost/drawer }}
+            </div>                 
+        </div>
     {{/courseindex}}
+
+
 
     {{#hasblocks}}
         {{< theme_boost/drawer }}
@@ -105,7 +119,7 @@
     {{/hasblocks}}
 
     <div id="page" class="nhsuk-width-container-fluid drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container"
-         data-region="mainpage" data-usertour="scroller">
+         data-region="mainpage" >
         <div id="topofscroll" class="main-inner nhsuk-u-padding-bottom-4">
             <div class="drawer-toggles d-flex">
                 {{#courseindex}}
@@ -114,7 +128,7 @@
                             class="btn icon-no-margin"
                             data-toggler="drawers"
                             data-action="toggle"
-                            data-target="theme_boost-drawers-courseindex"
+                            data-target="nhs-courseindex-sidebar"
                             data-toggle="tooltip"
                             data-placement="right"
                             title="{{#str}}opendrawerindex, core{{/str}}"
@@ -176,8 +190,10 @@
                 </div>
             </div>
         </div>
+    </div> <!-- end of div id="page"-->    
     </div>
-    <!-- end of div id="page"-->
+    {{! END OF WRAPPER .nhs-main-layout }}
+    
 
     {{# output.get_footer_data }}
         {{> theme_nhsetel/footer }}
@@ -190,7 +206,7 @@
 </html>
 {{#js}}
 M.util.js_pending('theme_boost/loader');
-require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {    
     Drawer.init();
     M.util.js_complete('theme_boost/loader');
 });

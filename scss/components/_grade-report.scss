@@ -7,8 +7,8 @@
     justify-items: stretch;             /* addition to go with above Firefox fixEnsures small tables stretch full-width in Chrome/Edge */
 }
 
-#page-grade-report-grader-index #user-grades {
-    width: max-content !important;
+#page-grade-report-grader-index #user-grades {    
+    width: 100% !important;
     min-width: 100%;
 }
 

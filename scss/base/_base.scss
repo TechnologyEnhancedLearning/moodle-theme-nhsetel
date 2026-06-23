@@ -1,6 +1,10 @@
 // Base styles for the NHSE theme
 // These are foundational styles that are not resets, but apply globally
 
+html {
+  background-color: #fff !important;
+}
+
 body {
   height: auto;
   background-color: core.$nhsuk-form-element-background-color;
