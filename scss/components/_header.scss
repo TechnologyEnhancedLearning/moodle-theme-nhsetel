@@ -969,7 +969,7 @@ button.nhsuk-header__menu-toggle.nav-link:focus {
 }
 
 .autosuggestion-option .autosuggestion-icon {
-    fill: core.nhsuk-colour("grey-4") !important;
+    fill: core.nhsuk-colour("grey-3") !important;
     float: left;
     height: 20px;
     margin: 2px 8px 0 0;
@@ -998,6 +998,11 @@ button.nhsuk-header__menu-toggle.nav-link:focus {
     }
 }
 
+.autosuggestion-option .autosuggestion-subtext {
+    color: core.nhsuk-colour("grey-2") !important;       
+    margin: 0px;
+}
+
 /* Ensure icons and text behave inside the flex/block link */
 .autosuggestion-option .autosuggestion-link {
     display: flex;
@@ -1019,6 +1024,8 @@ button.nhsuk-header__menu-toggle.nav-link:focus {
     flex-grow: 1;
     flex-shrink: 0;
 }
+
+
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {

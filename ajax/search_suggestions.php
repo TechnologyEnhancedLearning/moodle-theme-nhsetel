@@ -59,10 +59,10 @@ try {
     exit;
 }
 
-$searchterm = optional_param('query', '', PARAM_TEXT); 
+$searchterm = optional_param('query', '', PARAM_RAW);
 
 $api_endpoint_path = 'Search/GetAutoSuggestionResult/';
-$url_for_search = $api_base_url . $api_endpoint_path . urlencode($searchterm);
+$url_for_search = $api_base_url . $api_endpoint_path . rawurlencode($searchterm);
 
 
 try 
