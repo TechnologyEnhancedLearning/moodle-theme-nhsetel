@@ -206,8 +206,10 @@
 </html>
 {{#js}}
 M.util.js_pending('theme_boost/loader');
-require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {    
+require(['theme_boost/loader', 'theme_boost/drawer', 'theme_nhsetel/header'], function(Loader, Drawer, Header) {    
     Drawer.init();
+    Header.init(); // Initializes your header observer with console logging
+    
     M.util.js_complete('theme_boost/loader');
 });
 {{/js}}

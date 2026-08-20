@@ -1,12 +1,16 @@
 /* ==========================================================================
 // DRAWER STYLES
+// Moodle includes a left hand side drawer for the course index
+// and a right hand side drawer for displaying blocks
 // ========================================================================== */
 
 .drawer {
+  // Global drawer text size
   ul {
     font-size: 15px;
   }
 
+  /*  RHS Block Drawer: Padding for list items inside blocks (e.g., HTML blocks, Overview) */
   .card-text {
     li {
       padding: .25rem .5rem;
@@ -14,9 +18,8 @@
   }
 }
 
+/* LHS and RHS drawercontent default heading styles */
 .drawercontent {
-  height: calc(100% - 124px);
-
   h1,
   h2,
   h3 {
@@ -25,79 +28,23 @@
     line-height: 1.5;
   }
 }
-
+/* Add padding to cards on my overview page - note this does not affect the lhs or rhs drawers */
 .drawers {
   .block_myoverview>.card-body {
     padding: 1.25rem !important;
   }
 }
 
-.comment-area {
-  padding: 10px 0 0;
-}
-
-.comment-list {
-  font-size: 1rem;
-  color: core.$nhsuk-text-color;
-
-  li {
-    background-color: core.nhsuk-colour("white");
-    margin: 0;
-    margin-bottom: 10px;
-  }
-}
-
-.comment-ctrl {
-  font-size: 1rem;
-}
-
-
-.dropdown-menu {
-  min-width: 20rem;
-}
-
-[data-region=right-hand-drawer].drawer {
-  top: 84px;
-  height: calc(100% - 149px)
-}
-
-@media (min-width: 640px) {
-  [data-region=right-hand-drawer].drawer {
-    top: 92px;
-  }
-}
-
-@media (min-width: 768px) {
-  .d-md-none {
-    display: block !important;
-  }
-
-  [data-region=right-hand-drawer].drawer {
-    top: 92px;
-  }
-
-  body.limitedwidth {
-    #page.drawers {
-      .footer-popover {
-        max-width: none;
-      }
-    }
-  }
-}
-
 @media (min-width: 992px) {
-  .d-md-none {
-    display: none !important;
-  }
-
-  [data-region=right-hand-drawer].drawer {
-    top: 140px;
-  }
 
   .drawer-left,
-  .drawer-right {
-    top: 135px;
+  .drawer-right {    
     height: auto !important;
+  }
+
+  /* Dynamically calculate the RHS drawer top using the current header height */
+  .drawer-right {
+    top: var(--header-height, 135px) !important;    
   }
 }
 
@@ -115,10 +62,22 @@
       vertical-align: middle;
     }
   }
+  
+  .courseindex-item .courseindex-link{
+    color: #005eb8 !important;
 
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
   .courseindex-item.pageitem {
-    background-color: #005eb8;
-    color: #fff;
+    /* background-color: #005eb8; */
+    /* color: #fff; */
+    background: linear-gradient(to right, #005eb8 0.4rem, transparent 0);
+    color: #005eb8 !important;
+    border-radius: 0 !important;
+    border:0 !important;
+    font-weight: bold;
     scroll-margin: 6rem;
 
     // When the active item is focused, ensure it follows NHS accessibility
@@ -182,7 +141,7 @@
     overflow-x: hidden !important;
     transform: none !important;
     transition: none !important;
-    background-color: #fff;
+    background-color: #f8f9fa;
     height: auto !important;
 
     .drawer-header {
@@ -220,3 +179,50 @@
   }
 
 }
+
+/* ==========================================================================
+// COURSE INDEX - DISABLE SCROLL HIGHLIGHTING
+// ========================================================================== */
+.path-course-view {
+  .courseindex {
+    /* Target .pageitem (and fallback active classes) to suppress scroll highlighting */
+    .courseindex-item.pageitem,
+    .courseindex-item.is-active,
+    .courseindex-item.active {
+      background: transparent !important;
+      background-color: transparent !important;
+      color: #005eb8 !important;
+      font-weight: normal !important;
+
+      a.courseindex-link {
+        background-color: transparent !important;
+        color: #005eb8 !important;
+      }
+    }
+
+    /* Retain accessible focus styles ONLY when a user actively clicks or tabs */
+    .courseindex-item {
+      border:0 !important;
+      /* :focus-visible ensures JS scrollspy .focus() calls are ignored */
+      &:focus-visible,
+      &:focus-within:has(:focus-visible) {
+        /* background-color: transparent !important; */ 
+
+        a.courseindex-link {
+          background-color: #ffeb3b !important; // NHS Yellow
+          color: #212b32 !important;            // NHS Dark Text
+          box-shadow: 0 -2px #ffeb3b, 0 4px #212b32;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+
+
+/* prevent status icon on LHS menu pushing text across */
+.drawercontent .courseindex .icon {
+  margin-right: 0 !important;
+}
+

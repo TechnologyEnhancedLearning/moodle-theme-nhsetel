@@ -6,13 +6,7 @@ a {
     &:focus {
       @include core.nhsuk-focused-text;
     }
-  }
-
-  &.btn {
-    &:focus {
-      @include core.nhsuk-focused-text;
-    }
-  }
+  }  
 
   &.nav-link {
     &:focus {
@@ -90,18 +84,19 @@ a:not([class]):focus,
 
 /* 2. THE SECTION HIGHLIGHT */
 /* When a section title is focused (via Tab or Click) */
-[role="treeitem"]:focus > .nhsuk-focus-target,
-[role="treeitem"]:focus > .courseindex-section > .nhsuk-focus-target {
-    background-color: #ffeb3b !important;
+/* Apply red/yellow focus ONLY on keyboard navigation, excluding mouse-activated focus */
+[role="treeitem"]:focus-visible:not(:hover) > .nhsuk-focus-target,
+[role="treeitem"]:focus-visible:not(:hover) > .courseindex-section > .nhsuk-focus-target {
+    background-color: #ffeb3b !important; /* or red !important */
     color: #212b32 !important;
-    
+
     a, span, i, .courseindex-link {
         color: #212b32 !important;
         background-color: transparent !important;
     }
 }
-[role="treeitem"]:focus > .courseindex-section-title,
-[role="treeitem"]:focus > .courseindex-section > .courseindex-section-title {
+[role="treeitem"]:focus-visible:not(:hover):not(:active) > .courseindex-section-title,
+[role="treeitem"]:focus-visible:not(:hover):not(:active) > .courseindex-section > .courseindex-section-title {
     background-color: #ffeb3b !important;
     color: #212b32 !important;
 
@@ -125,20 +120,10 @@ a:not([class]):focus,
 /* This rule targets non-active links when a parent is focused. */
 /* CRITICAL: No !important on color here. This allows Rule 5 to override it. */
 #course-index [role="treeitem"]:focus .courseindex-item:not(.is-current-page):not(.pageitem) .courseindex-link:not(:focus) {
-    color: #005eb8; 
+    color: red; 
     background-color: transparent;
 }
 
-/* 5. THE ACTIVE ENFORCER */
-/* This ensures the active page/activity is ALWAYS NHS Blue with White text. */
-/* This rule WINS because it still uses !important. */
-.is-current-page, 
-.is-current-page .courseindex-link,
-.courseindex-item.pageitem,
-.courseindex-item.pageitem .courseindex-link {
-    background-color: #005eb8 !important;
-    color: #ffffff !important;
-}
 
 /* 6. THE SUBSECTION / SECTION ENFORCER */
 /* Applies the same 'Active' logic if the section itself is the current target */
@@ -160,7 +145,7 @@ a:not([class]):focus,
 .pageitem i,
 .pageitem span,
 .pageitem .courseindex-link {
-    color: #ffffff !important;
+    color: #212b32 !important;
 }
 
 /* skip link focus colour */
