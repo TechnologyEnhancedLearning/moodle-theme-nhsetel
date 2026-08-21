@@ -135,6 +135,7 @@
     visibility: visible !important;    
     position: sticky !important;
     top: 0px !important;
+    z-index: 1 !important; /* Lowers sticky layer below dropdown menus */
     min-width: 285px !important;
     max-width: 285px !important;
     overflow-y: auto !important;
@@ -225,4 +226,5 @@
 .drawercontent .courseindex .icon {
   margin-right: 0 !important;
 }
+
 
