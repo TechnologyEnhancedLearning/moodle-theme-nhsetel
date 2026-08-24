@@ -169,7 +169,7 @@ select.form-control:focus,
 // Course Index Drawer Focus (Sections, Subsections & Activities)
 // ---------------------------------------------------------
 
-// 1. SECTION & SUBSECTION TITLES (The working version)
+// 1. Section & Subsection Titles
 // Targets the title block directly. The :not(:has(ul :focus-within)) prevents 
 // the title from highlighting when a user tabs into a nested child activity.
 #nhs-courseindex-sidebar [role="treeitem"] {
@@ -186,7 +186,7 @@ select.form-control:focus,
     position: relative !important;
     z-index: 10 !important;
 
-    // Maintain dark text/icon contrast on yellow focus (No '&' here!)
+    // Maintain dark text/icon contrast on yellow focus
     a, span, i, .courseindex-link, .courseindex-chevron {
       color: #212b32 !important;
       background-color: transparent !important;
@@ -196,7 +196,7 @@ select.form-control:focus,
   }
 }
 
-// 2. LEAF ACTIVITIES (The working version)
+// 2. Leaf Activities
 // Targets items that do not contain a <ul> list, preventing wrappers from catching focus.
 #nhs-courseindex-sidebar .courseindex-item[role="treeitem"]:not(:has(ul)) {
   
@@ -215,4 +215,3 @@ select.form-control:focus,
     }
   }
 }
-

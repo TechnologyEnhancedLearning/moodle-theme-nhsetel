@@ -29,7 +29,6 @@
   padding: 1.25rem !important;
 }
 
-
 // ==========================================================================
 // 2. COURSE INDEX (LHS MENU) STYLES
 // ==========================================================================
@@ -59,7 +58,7 @@
     }
 
     // Failsafe: Explicitly prevent chevrons, completion icons, and locks 
-    // from ever receiving an underline, even if hovered directly.
+    // from receiving an underline, even if hovered directly.
     .courseindex-chevron,
     .courseindex-locked,
     .completioninfo {
@@ -115,13 +114,14 @@
     }
   }
 }
+
 // ==========================================================================
 // 3. DESKTOP LAYOUT & STICKY DRAWER (Large Screens +)
 // ==========================================================================
 
 @media (min-width: 992px) {
   
-  // Let the page be as long as it needs to be 
+  // Allow unrestricted page height
   body,
   #page-wrapper {
     overflow: visible !important;
