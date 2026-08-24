@@ -44,12 +44,27 @@
       color: #005eb8 !important;
     }
 
+    // Apply underline ONLY to the text link when the row is hovered
     &:hover {
-      text-decoration: underline !important;
+      .courseindex-link {
+        text-decoration: underline !important;
+      }
       
       &.pageitem {
         background-color: transparent; 
         color: inherit;
+      }
+    }
+
+    // Failsafe: Explicitly prevent chevrons, completion icons, and locks 
+    // from ever receiving an underline, even if hovered directly.
+    .courseindex-chevron,
+    .courseindex-locked,
+    .completioninfo {
+      text-decoration: none !important;
+      
+      &:hover {
+        text-decoration: none !important;
       }
     }
 
@@ -124,7 +139,6 @@
     }
   }
 }
-
 
 // ==========================================================================
 // 3. DESKTOP LAYOUT & STICKY DRAWER (Large Screens +)

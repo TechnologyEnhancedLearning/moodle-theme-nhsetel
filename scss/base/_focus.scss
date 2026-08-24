@@ -65,40 +65,6 @@ a:not([class]):focus,
   box-shadow: none !important;
 }
 
-// Apply focus styling exclusively for keyboard navigation
-[role="treeitem"]:focus-visible:not(:hover) > .nhsuk-focus-target,
-[role="treeitem"]:focus-visible:not(:hover) > .courseindex-section > .nhsuk-focus-target {
-  background-color: #ffeb3b !important;
-  color: #212b32 !important;
-
-  a, span, i, .courseindex-link {
-    color: #212b32 !important;
-    background-color: transparent !important;
-  }
-}
-
-[role="treeitem"]:focus-visible:not(:hover):not(:active) > .courseindex-section-title,
-[role="treeitem"]:focus-visible:not(:hover):not(:active) > .courseindex-section > .courseindex-section-title {
-  background-color: #ffeb3b !important;
-  color: #212b32 !important;
-  box-shadow: 0 -2px #ffeb3b, 0 4px #212b32 !important;
-
-  a, span, i, .courseindex-link {
-    color: #212b32 !important;
-    background-color: transparent !important;
-  }
-}
-
-// Individual activity/page link focus
-.courseindex-item[role="treeitem"]:not(:has(.nhsuk-focus-target)):focus {
-  background-color: #ffeb3b !important;
-  color: #212b32 !important;
-  
-  .courseindex-link, span, i {
-    color: #212b32 !important;
-  }
-}
-
 // Target non-active links when a parent is focused
 // Note: Omit !important on color to allow active state overrides
 #course-index [role="treeitem"]:focus .courseindex-item:not(.is-current-page):not(.pageitem) .courseindex-link:not(:focus) {
@@ -146,8 +112,9 @@ a.sr-only.sr-only-focusable[href="#maincontent"]:focus {
   }
 }
 
+// Neutralize Bootstrap blue focus ring
 .nav-link:focus {
-  box-shadow: none !important; // Neutralize Bootstrap blue focus ring
+  box-shadow: none !important; 
 }
 
 // Non-shifting NHS visual focus for navigation links
@@ -198,26 +165,61 @@ select.form-control:focus,
   outline-offset: 0 !important;
 }
 
-// Sidebar: ID prefix used to increase specificity over Moodle core styles
-#nhs-courseindex-sidebar .courseindex-item {
-  &:focus,
+// ---------------------------------------------------------
+// Course Index Drawer Focus (Sections, Subsections & Activities)
+// ---------------------------------------------------------
+
+// 1. SECTION & SUBSECTION TITLES (The working version)
+// Targets the title block directly. The :not(:has(ul :focus-within)) prevents 
+// the title from highlighting when a user tabs into a nested child activity.
+#nhs-courseindex-sidebar [role="treeitem"] {
+  
+  &:focus-visible > .courseindex-section-title,
+  &:focus-visible > .courseindex-section > .courseindex-section-title,
+  &:focus-visible > .nhsuk-focus-target,
+  &:focus-within:not(:has(ul :focus-within)) > .courseindex-section-title,
+  &:focus-within:not(:has(ul :focus-within)) > .courseindex-section > .courseindex-section-title,
+  &:focus-within:not(:has(ul :focus-within)) > .nhsuk-focus-target {
+    
+    background-color: #ffeb3b !important;
+    box-shadow: 0 -2px #ffeb3b, 0 4px #212b32 !important;
+    position: relative !important;
+    z-index: 10 !important;
+
+    // Maintain dark text/icon contrast on yellow focus (No '&' here!)
+    a, span, i, .courseindex-link, .courseindex-chevron {
+      color: #212b32 !important;
+      background-color: transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+// 2. LEAF ACTIVITIES (The working version)
+// Targets items that do not contain a <ul> list, preventing wrappers from catching focus.
+#nhs-courseindex-sidebar .courseindex-item[role="treeitem"]:not(:has(ul)) {
+  
+  &:focus-visible,
   &:focus-within {
     background-color: #ffeb3b !important;
     box-shadow: 0 -2px #ffeb3b, 0 4px #212b32 !important;
     position: relative !important;
-    z-index: 10 !important; // Prevents adjacent list items from hiding the bottom shadow
-  }
+    z-index: 10 !important;
 
-  // Maintain dark text/icon contrast on yellow focus
-  &:focus .courseindex-link,
-  &:focus-within .courseindex-link,
-  &:focus .courseindex-chevron,
-  &:focus-within .courseindex-chevron,
-  &:focus i,
-  &:focus-within i {
-    color: #212b32 !important;
-    outline: none !important;
-    box-shadow: none !important;
-    background-color: transparent !important;
+    .courseindex-link, span, i, .icon {
+      color: #212b32 !important;
+      background-color: transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
   }
+}
+
+// 3. THE SURGICAL SUBSECTION FIX
+// This specifically kills the text-width yellow highlight you saw on "New subsection"
+// when you focused on "Test URL 1" inside it.
+#nhs-courseindex-sidebar .courseindex-item:focus-within a.courseindex-link:not(:focus) {
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
