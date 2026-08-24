@@ -40,8 +40,21 @@ body.lockscroll {
     }
 
     .main-inner {
-      padding: 1.5rem 1.5rem;
+      padding: 1.5rem;
       width: 100%;
+
+      @media (min-width: 1200px) {
+
+        /* When lhs drawer is closed set a minimum width to ensure the content doesn't sit in a central column */
+        body:not(:has(#page.show-drawer-left)) & {
+          min-width: 1200px;
+        }
+
+        /* When lhs drawer is open give the page a minimum width to content doesnt sit in a central column if the content width is smaller */
+        /* Ensures the total width (285+915) is 1200px */
+        body:has(#page.show-drawer-left) & {
+          min-width: 915px;        }
+        }
     }
   }
 
@@ -54,7 +67,8 @@ body.lockscroll {
 /* Prevents footer sitting half way up the page when there is little content */
 
 #page-wrapper {
-  min-height: 100vh;
+  height: auto !important;
+  min-height: 100vh !important;
   display: flex;
   flex-direction: column;
 }
@@ -64,8 +78,6 @@ body.lockscroll {
   display: flex;
   flex-direction: column;
 }
-
-
 
 /**
  * Max width except reportbuilder
@@ -243,20 +255,35 @@ body.pagelayout-report #page.drawers .main-inner {
   border-radius: 0;
 }
 
-/* Course page content area padding to allow room for left hand side menu toggle */
-body.limitedwidth.pagelayout-course #page-wrapper #page .main-inner,
-body.pagelayout-incourse #page-wrapper #page .main-inner,
-body.pagelayout-report #page-wrapper #page .main-inner {
-  padding-left: 3.5rem;
-  padding-right: 3.5rem;
+/* Allow space for the draw toggle buttons */
+/* 1. At wide widths (1200px+), the central container has room, 
+      so we keep padding minimal to maximize content space. */
+@media (min-width: 1200px) {
+
+  /* Base State: Drawer CLOSED  */
+  body.pagelayout-course #page-wrapper #page .main-inner,
+  body.pagelayout-incourse #page-wrapper #page .main-inner,
+  body.pagelayout-report #page-wrapper #page .main-inner {
+    padding-left: 2rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Override State: Drawer is OPEN (5rem) */
+  /* This provides breathing room between the lhs drawer and the content  */
+  #page.show-drawer-left .main-inner {
+    padding-left: 5rem !important;
+  }
 }
 
-/* Course page content area padding to allow room for left hand side menu toggle */
-body.limitedwidth.pagelayout-course #page-wrapper #page .main-inner,
-body.pagelayout-incourse #page-wrapper #page .main-inner,
-body.pagelayout-report #page-wrapper #page .main-inner {
-  padding-left: 3.5rem;
-  padding-right: 3.5rem;
+/* When the screen narrows (below 1200px), the 2.5rem left padding 
+      provides space for the lhs drawer toggle button. */
+@media (max-width: 1199px) {
+  body.pagelayout-course #page-wrapper #page .main-inner,
+  body.pagelayout-incourse #page-wrapper #page .main-inner,
+  body.pagelayout-report #page-wrapper #page .main-inner {
+    padding-left: 2.5rem !important;
+    padding-right: 1rem !important;
+  }
 }
 
 /* remove the max-width restriction and allow the breadcrumb and title */

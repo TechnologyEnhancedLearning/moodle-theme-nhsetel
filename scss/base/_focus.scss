@@ -1,19 +1,6 @@
 // Global focus styles for interactive elements
-// Applies to links, buttons, and form controls site-wide
-
 a {
-  &.btn {
-    &:focus {
-      @include core.nhsuk-focused-text;
-    }
-  }
-
-  &.btn {
-    &:focus {
-      @include core.nhsuk-focused-text;
-    }
-  }
-
+  &.btn,
   &.nav-link {
     &:focus {
       @include core.nhsuk-focused-text;
@@ -21,27 +8,18 @@ a {
   }
 }
 
-button {
-  &.btn {
-    &:focus {
-      @include core.nhsuk-focused-text;
-    }
-  }
+button.btn:focus {
+  @include core.nhsuk-focused-text;
 }
 
-input {
-  &.custom-control-input {
-    &:focus {
-      outline: core.$nhsuk-focus-width solid core.$nhsuk-focus-colour; // Applies the yellow outline
-      outline-offset: 0;
-      box-shadow: 0 0 0 core.$nhsuk-focus-width core.$nhsuk-focus-colour; // Applies the yellow box shadow
-      border-color: core.$nhsuk-focus-text-colour; // Applies the thick black border effect
-    }
-  }
+input.custom-control-input:focus {
+  outline: core.$nhsuk-focus-width solid core.$nhsuk-focus-colour;
+  outline-offset: 0;
+  box-shadow: 0 0 0 core.$nhsuk-focus-width core.$nhsuk-focus-colour;
+  border-color: core.$nhsuk-focus-text-colour;
 }
 
-
-// override boost theme focus styles with NHSUK focus styles
+// Override Boost theme defaults with NHS.UK styles
 .aalink.focus,
 a.focus.autolink,
 .aalink:focus,
@@ -50,28 +28,25 @@ a.autolink:focus,
 .arrow_link:focus,
 a:not([class]).focus,
 a:not([class]):focus,
-.activityinstance>a.focus,
-.activityinstance>a:focus {
-    background-color: core.nhsuk-colour("yellow");
-    box-shadow: 0 -2px core.nhsuk-colour("yellow"), 0 3px core.nhsuk-colour("black");
-    outline: 4px solid transparent;
-    text-decoration: none;
+.activityinstance > a.focus,
+.activityinstance > a:focus {
+  background-color: core.nhsuk-colour("yellow");
+  box-shadow: 0 -2px core.nhsuk-colour("yellow"), 0 3px core.nhsuk-colour("black");
+  outline: 4px solid transparent;
+  text-decoration: none;
 }
 
 .btn.btn-icon:focus {
-    background-color: core.nhsuk-colour("yellow");
+  background-color: core.nhsuk-colour("yellow");
 }
 
-
-/* Removing style focus and adding nhsuk focus for left hand side menu button */
+// Left-hand menu toggle button overrides
 .drawer-toggles .drawer-toggler .btn:focus {
   @include core.nhsuk-focused-button;
 }
 
-/* Prevent boost CSS affecting the toggle button position */
 #page .drawer-toggles .drawer-toggler {
-  top: unset;
-  /* prevent static CSS from interfering */
+  top: unset; // Prevents Boost static CSS from altering position
 }
 
 .drawerheader .aabtn.text-reset.d-flex.align-items-center.py-1.h-100.d-md-none,
@@ -79,80 +54,35 @@ a:not([class]):focus,
   display: none !important;
 }
 
-/* 1. THE GLOBAL RESET */
-/* Removes Moodle's default focus rings to make way for our NHS yellow */
+// ---------------------------------------------------------
+// Course Index Focus States
+// ---------------------------------------------------------
+
+// Remove Moodle's default focus rings
 .courseindex [role="treeitem"]:focus,
 .courseindex [role="treeitem"]:not([aria-expanded="true"]):focus {
-    outline: 0 !important;
-    box-shadow: none !important;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 
-
-/* 2. THE SECTION HIGHLIGHT */
-/* When a section title is focused (via Tab or Click) */
-[role="treeitem"]:focus > .nhsuk-focus-target,
-[role="treeitem"]:focus > .courseindex-section > .nhsuk-focus-target {
-    background-color: #ffeb3b !important;
-    color: #212b32 !important;
-    
-    a, span, i, .courseindex-link {
-        color: #212b32 !important;
-        background-color: transparent !important;
-    }
-}
-[role="treeitem"]:focus > .courseindex-section-title,
-[role="treeitem"]:focus > .courseindex-section > .courseindex-section-title {
-    background-color: #ffeb3b !important;
-    color: #212b32 !important;
-
-    a, span, i, .courseindex-link {
-        color: #212b32 !important;
-        background-color: transparent !important;
-    }
-}
-
-/* 3. THE ACTIVITY HIGHLIGHT */
-/* When an individual activity/page link is focused */
-.courseindex-item[role="treeitem"]:not(:has(.nhsuk-focus-target)):focus {
-    background-color: #ffeb3b !important;
-    color: #212b32 !important;
-    .courseindex-link, span, i {
-        color: #212b32 !important;
-    }
-}
-
-/* 4. THE SHIELD (Surgical Version) */
-/* This rule targets non-active links when a parent is focused. */
-/* CRITICAL: No !important on color here. This allows Rule 5 to override it. */
+// Target non-active links when a parent is focused
+// Note: Omit !important on color to allow active state overrides
 #course-index [role="treeitem"]:focus .courseindex-item:not(.is-current-page):not(.pageitem) .courseindex-link:not(:focus) {
-    color: #005eb8; 
-    background-color: transparent;
+  color: red; 
+  background-color: transparent;
 }
 
-/* 5. THE ACTIVE ENFORCER */
-/* This ensures the active page/activity is ALWAYS NHS Blue with White text. */
-/* This rule WINS because it still uses !important. */
-.is-current-page, 
-.is-current-page .courseindex-link,
-.courseindex-item.pageitem,
-.courseindex-item.pageitem .courseindex-link {
-    background-color: #005eb8 !important;
-    color: #ffffff !important;
-}
-
-/* 6. THE SUBSECTION / SECTION ENFORCER */
-/* Applies the same 'Active' logic if the section itself is the current target */
+// Active section styling
 .is-current-section > .courseindex-item {
-    background-color: #005eb8 !important;
+  background-color: #005eb8 !important;
+  color: #ffffff !important;
+  
+  a, span, i {
     color: #ffffff !important;
-    
-    a, span, i {
-        color: #ffffff !important;
-    }
+  }
 }
 
-/* 7. THE FINAL PROTECTION */
-/* Ensures all icons and badges inside any blue active element stay white */
+// Ensure icon and badge contrast inside active elements
 .is-current-page i, 
 .is-current-page span,
 .is-current-section i,
@@ -160,90 +90,70 @@ a:not([class]):focus,
 .pageitem i,
 .pageitem span,
 .pageitem .courseindex-link {
-    color: #ffffff !important;
+  color: #212b32 !important;
 }
 
-/* skip link focus colour */
+// ---------------------------------------------------------
+// Navigation & Form Controls
+// ---------------------------------------------------------
+
 a.sr-only.sr-only-focusable[href="#maincontent"]:focus {
   @include core.nhsuk-focused-button;
 }
 
-
-
-/* focus colour on activity completion buttons */
-.activity-item .activity-completion button.btn:focus,
-.activity-item .activity-completion button.btn.focus,
-.activity-item .activity-completion button.btn-success:focus,
-.activity-item .activity-completion button.btn:focus,
-.activity-item .activity-completion a[role=button].btn:focus,
-.activity-item .activity-completion a[role=button].btn.focus {
-  @include core.nhsuk-focused-button;
+// Activity completion buttons
+.activity-item .activity-completion {
+  button.btn:focus,
+  button.btn.focus,
+  button.btn-success:focus,
+  a[role=button].btn:focus,
+  a[role=button].btn.focus {
+    @include core.nhsuk-focused-button;
+  }
 }
 
-
-/* Neutralizes the generic Bootstrap blue focus ring */
+// Neutralize Bootstrap blue focus ring
 .nav-link:focus {
-  box-shadow: none !important;
-  /* You may need to add outline: none !important; here if the blue ring persists */
+  box-shadow: none !important; 
 }
 
-
-/* Applies the final, non-shifting NHS visual focus/active style to navigation links */
+// Non-shifting NHS visual focus for navigation links
 a.nav-link:focus,
 a.nav-link:active {
-  /* --- 1. OVERRIDE THE CONFLICTING BORDER RESET --- */
   border-width: 0 !important;
   border-bottom-width: 4px !important;
-  /* Forces the required 4px bottom border */
-
-  /* FIX FOR SHIFTING: Maintain 4px space at the top using a transparent border */
-  border-top: 4px solid transparent !important;
-
-  /* --- 2. APPLY NHS FOCUS VISUALS --- */
+  border-top: 4px solid transparent !important; // Transparent top border prevents layout shift
   background-color: core.nhsuk-colour("yellow") !important;
   border-bottom-color: core.nhsuk-colour("black") !important;
-  /* Sets the color of the 4px bottom border */
   border-style: solid !important;
-
   color: core.nhsuk-colour("black") !important;
-  /* --- 3. CLEANUP --- */
   box-shadow: none !important;
   outline: none !important;
   text-decoration: none !important;
 }
 
-
-// Prevent global style applying for dropdown buttons preventing the yellow and black appearance
-
+// Prevent global styles from overriding dropdown appearance
 .dropdown-item,
 .dropdown-item:visited {
   box-shadow: none !important;
 }
 
-
 .btn.dropdown-toggle,
 .btn-outline-secondary.dropdown-toggle {
-  box-shadow: none !important; // No shadow by default
+  box-shadow: none !important; 
 }
 
 .btn.dropdown-toggle:focus,
-.btn-outline-secondary.dropdown-toggle:focus {
+.btn-outline-secondary.dropdown-toggle:focus,
+select.form-control:focus,
+.custom-select:focus {
   border: 2px solid #212b32 !important;
   box-shadow: inset 0 0 0 2px #212b32 !important;
   outline: 4px solid #ffeb3b !important;
   outline-offset: 0 !important;
   background-color: transparent !important;
   text-decoration: none !important;
-}
-
-/* Apply the same NHS focus style to standard Select menus */
-select.form-control:focus,
-.custom-select:focus {
-    border: 2px solid #212b32 !important;
-    box-shadow: inset 0 0 0 2px #212b32 !important;
-    outline: 4px solid #ffeb3b !important;
-    outline-offset: 0 !important;
-    color: #212b32 !important;
+  color: #212b32 !important;
 }
 
 .simplesearchform .form-control:focus {
@@ -253,4 +163,55 @@ select.form-control:focus,
   box-shadow: inset 0 0 0 2px #212b32 !important;
   outline: 4px solid #ffeb3b !important;
   outline-offset: 0 !important;
+}
+
+// ---------------------------------------------------------
+// Course Index Drawer Focus (Sections, Subsections & Activities)
+// ---------------------------------------------------------
+
+// 1. Section & Subsection Titles
+// Targets the title block directly. The :not(:has(ul :focus-within)) prevents 
+// the title from highlighting when a user tabs into a nested child activity.
+#nhs-courseindex-sidebar [role="treeitem"] {
+  
+  &:focus-visible > .courseindex-section-title,
+  &:focus-visible > .courseindex-section > .courseindex-section-title,
+  &:focus-visible > .nhsuk-focus-target,
+  &:focus-within:not(:has(ul :focus-within)) > .courseindex-section-title,
+  &:focus-within:not(:has(ul :focus-within)) > .courseindex-section > .courseindex-section-title,
+  &:focus-within:not(:has(ul :focus-within)) > .nhsuk-focus-target {
+    
+    background-color: #ffeb3b !important;
+    box-shadow: 0 -2px #ffeb3b, 0 4px #212b32 !important;
+    position: relative !important;
+    z-index: 10 !important;
+
+    // Maintain dark text/icon contrast on yellow focus
+    a, span, i, .courseindex-link, .courseindex-chevron {
+      color: #212b32 !important;
+      background-color: transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+// 2. Leaf Activities
+// Targets items that do not contain a <ul> list, preventing wrappers from catching focus.
+#nhs-courseindex-sidebar .courseindex-item[role="treeitem"]:not(:has(ul)) {
+  
+  &:focus-visible,
+  &:focus-within {
+    background-color: #ffeb3b !important;
+    box-shadow: 0 -2px #ffeb3b, 0 4px #212b32 !important;
+    position: relative !important;
+    z-index: 10 !important;
+
+    .courseindex-link, span, i, .icon {
+      color: #212b32 !important;
+      background-color: transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
 }

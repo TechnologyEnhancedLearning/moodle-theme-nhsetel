@@ -23,7 +23,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingnhse', get_string('configtitle', 'theme_nhsetel'));
+    $settings = new theme_boost_admin_settingspage_tabs('themesettingnhsetel', get_string('configtitle', 'theme_nhsetel'));
     $page = new admin_settingpage('theme_nhsetel_general', get_string('generalsettings', 'theme_nhsetel'));
 
      // Theme customisable property: Add the .NET Application Base URL setting to the 'General' tab ---
