@@ -216,10 +216,3 @@ select.form-control:focus,
   }
 }
 
-// 3. THE SURGICAL SUBSECTION FIX
-// This specifically kills the text-width yellow highlight you saw on "New subsection"
-// when you focused on "Test URL 1" inside it.
-#nhs-courseindex-sidebar .courseindex-item:focus-within a.courseindex-link:not(:focus) {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}

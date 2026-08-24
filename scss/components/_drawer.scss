@@ -44,8 +44,10 @@
       color: #005eb8 !important;
     }
 
-    // Apply underline ONLY to the text link when the row is hovered
-    &:hover {
+    // Apply underline ONLY to the text link of the specific row being hovered.
+    // The :not(:has(...)) prevents parent section titles from underlining 
+    // when you hover over one of their nested child activities.
+    &:hover:not(:has(.courseindex-item:hover)) {
       .courseindex-link {
         text-decoration: underline !important;
       }
@@ -65,19 +67,6 @@
       
       &:hover {
         text-decoration: none !important;
-      }
-    }
-
-    // NHS Accessibility: Focus states (Default)
-    &:focus-within,
-    &:focus {
-      background-color: transparent; 
-
-      a.courseindex-link {
-        background-color: #ffeb3b !important;
-        color: #212b32 !important; 
-        box-shadow: 0 -2px #ffeb3b, 0 4px #212b32;
-        text-decoration: none;
       }
     }
   }
@@ -125,21 +114,7 @@
       color: #005eb8 !important;
     }
   }
-
-  // Retain accessible focus styles ONLY when a user actively clicks or tabs
-  .courseindex-item {
-    &:focus-visible,
-    &:focus-within:has(:focus-visible) {
-      a.courseindex-link {
-        background-color: #ffeb3b !important; 
-        color: #212b32 !important;            
-        box-shadow: 0 -2px #ffeb3b, 0 4px #212b32;
-        text-decoration: none;
-      }
-    }
-  }
 }
-
 // ==========================================================================
 // 3. DESKTOP LAYOUT & STICKY DRAWER (Large Screens +)
 // ==========================================================================
