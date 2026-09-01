@@ -132,6 +132,38 @@ if ($ADMIN->fulltree) {
     $scormpage->add($fullscreenbuttonsetting);
     $settings->add($scormpage);
 
+    // Navigation Settings Tab
+    $navpage = new admin_settingpage('theme_nhsetel_nav', get_string('navsettings', 'theme_nhsetel'));
+
+    // --- My courses Link Settings ---
+    $name = 'theme_nhsetel/mycourses_toggle';
+    $title = get_string('mycourses_toggle', 'theme_nhsetel');
+    $description = get_string('mycourses_toggle_desc', 'theme_nhsetel');
+    $default = 0;
+    $navpage->add(new admin_setting_configcheckbox($name, $title, $description, $default));
+
+    $name = 'theme_nhsetel/mycourses_text';
+    $title = get_string('mycourses_text', 'theme_nhsetel');
+    $description = get_string('mycourses_text_desc', 'theme_nhsetel');
+    $default = '';
+    $navpage->add(new admin_setting_configtext($name, $title, $description, $default));
+
+    // --- Calendar Link Settings ---
+    $name = 'theme_nhsetel/calendar_toggle';
+    $title = get_string('calendar_toggle', 'theme_nhsetel');
+    $description = get_string('calendar_toggle_desc', 'theme_nhsetel');
+    $default = 0;
+    $navpage->add(new admin_setting_configcheckbox($name, $title, $description, $default));
+
+    $name = 'theme_nhsetel/calendar_text';
+    $title = get_string('calendar_text', 'theme_nhsetel');
+    $description = get_string('calendar_text_desc', 'theme_nhsetel');
+    $default = '';
+    $navpage->add(new admin_setting_configtext($name, $title, $description, $default));
+
+    // Add the page to the settings
+    $settings->add($navpage);
+
     // Advanced settings.
     $page = new admin_settingpage('theme_nhsetel_advanced', get_string('advancedsettings', 'theme_nhsetel'));
 
