@@ -111,3 +111,13 @@ $string['showfooter']                                  = 'Show footer';
 $string['unaddableblocks']                             = 'Unneeded blocks';
 $string['unaddableblocks_desc']                        = 'The blocks specified are not needed when using this theme and will not be listed in the \'Add a block\' menu.';
 $string['title']                                       = 'Title';
+// Navigation settings
+$string['navsettings'] = 'Navigation Settings';
+$string['mycourses_toggle'] = 'Show "My courses" link';
+$string['mycourses_toggle_desc'] = 'Toggle whether the "My courses" link is displayed in the main navigation header.';
+$string['mycourses_text'] = '"My courses" link text';
+$string['mycourses_text_desc'] = 'The text to display for the "My courses" link. Leave blank to use the default "My courses".';
+$string['calendar_toggle'] = 'Show "Calendar" link';
+$string['calendar_toggle_desc'] = 'Toggle whether the "Calendar" link is displayed in the main navigation header.';
+$string['calendar_text'] = '"Calendar" link text';
+$string['calendar_text_desc'] = 'The text to display for the "Calendar" link. Leave blank to use the default "Calendar".';
