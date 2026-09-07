@@ -16,6 +16,11 @@
   display: none;
 }
 
+/* Force the enrolment container to stay open permanently */
+#page-enrol-index #id_selfheadercontainer {
+  display: block !important;
+}
+
 #page-enrol-index #id_selfheader {
   border-style: none
 }
