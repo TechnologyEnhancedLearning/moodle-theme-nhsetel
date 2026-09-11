@@ -18,11 +18,12 @@
   },
   "homepage": "https://github.com/TechnologyEnhancedLearning/moodle-theme-nhsetel#readme",
   "dependencies": {
-    "nhsuk-frontend": "^10.0.0",
-    "sass": "^1.79.4"
+    "nhsuk-frontend": "^10.4.0",
+    "sass": "^1.79.4",
+    "tel-frontend": "^0.1.0"
   },
-  "scripts": {
-  "build": "sass scss/nhsetel.scss:css/nhsetel.min.css --style compressed --verbose --load-path node_modules",
-  "watch": "sass --watch scss/nhsetel.scss:css/nhsetel.min.css --style compressed --load-path node_modules"
+"scripts": {
+    "build": "sass scss/nhsetel.scss:css/nhsetel.min.css --style compressed --verbose --load-path node_modules --load-path node_modules/nhsuk-frontend/src",
+    "watch": "sass --watch scss/nhsetel.scss:css/nhsetel.min.css --style compressed --load-path node_modules --load-path node_modules/nhsuk-frontend/src"
   }
 }

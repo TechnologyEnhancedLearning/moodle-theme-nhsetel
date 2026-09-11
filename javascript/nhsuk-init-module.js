@@ -4,16 +4,24 @@
 // /theme/nhsetel/node_modules/nhsuk-frontend/dist/nhsuk/nhsuk-frontend.js
 // (Using .js as per the file you provided, assuming it's the un-minified version).
 
-import { initAll } from '../node_modules/nhsuk-frontend/dist/nhsuk/nhsuk-frontend.js';
+import { initAll as initNHSFrontend } from '../node_modules/nhsuk-frontend/dist/nhsuk/nhsuk-frontend.js';
+import { initAll as initTelFrontend } from '../node_modules/tel-frontend/dist/tel-frontend/all.js';
 
 // Initialize all components after the DOM is fully loaded.
 // This is critical for ensuring the header component exists before it's initialized.
 document.addEventListener('DOMContentLoaded', function() {
     try {
-        initAll();
-        console.log("NHS Frontend V10 components initialized via import.");
+        initNHSFrontend();
+        console.log("NHS Frontend V10 components initialized.");
     } catch (e) {
         console.error("Failed to run NHS initAll():", e);
+    }
+
+    try {
+        initTelFrontend();
+        console.log("TEL Frontend components initialized.");
+    } catch (e) {
+        console.error("Failed to run TEL initAll():", e);
     }
 
     // --------------------------------------------------------------------------
