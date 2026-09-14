@@ -2,3 +2,168 @@
 body.format-multitopic div#course-header > div#course-header-banner > div#course-header-banner-text {
   padding-left: 0;
 }
+
+body.format-multitopic #region-main {
+
+  // 1. NHS Expander Card Container
+  li.section.course-section {
+    background-color: #f0f4f5 !important;
+    border: 1px solid #d8dde0 !important;
+    border-radius: 4px !important;
+    padding: 1.25rem !important;
+    margin-bottom: 1.5rem !important;
+    list-style: none;
+  }
+
+  // 2. Interactive Header Row
+  .course-section .d-flex.align-items-start {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 6px 8px !important; // Ample breathing room around circle and text
+    cursor: pointer;
+
+    // Normal Text Style
+    .sectionname {
+      margin-bottom: 0 !important;
+      font-size: 1.1875rem !important;
+      line-height: 1.5 !important;
+
+      &, a, .inplaceeditable {
+        color: #005eb8;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        font-weight: 700;
+      }
+    }
+
+    &:hover .sectionname {
+      &, a, .inplaceeditable {
+        color: #7c2855;
+      }
+    }
+
+    // -------------------------------------------------------------
+    // NHS FOCUS STATE
+    // -------------------------------------------------------------
+    &:focus-within {
+      background-color: #ffeb3b !important;
+      box-shadow: 0 -2px #ffeb3b, 0 4px #212b32 !important;
+      outline: none !important;
+
+      .sectionname {
+        &, a, .inplaceeditable {
+          color: #212b32 !important;
+          text-decoration: none !important;
+        }
+      }
+
+      a.icons-collapse-expand {
+        background-color: #212b32 !important;
+        box-shadow: none !important; // Removes the black blob under the button
+
+        &::before,
+        &::after {
+          background-color: #ffeb3b !important;
+        }
+      }
+    }
+  }
+
+  // 3. NHS Circle Plus/Minus Button
+  a.icons-collapse-expand {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    min-width: 2rem !important;
+    background-color: #005eb8;
+    border-radius: 50% !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-right: 0.75rem !important;
+    position: relative !important;
+    text-decoration: none !important;
+    outline: none !important;
+    box-shadow: none !important; // Prevent native Bootstrap button focus shadow
+
+    &:focus,
+    &:active {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    // Hide native chevrons
+    .expanded-icon,
+    .collapsed-icon,
+    i.icon {
+      display: none !important;
+    }
+
+    // White horizontal bar (minus)
+    &::before {
+      content: "" !important;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: 12px !important;
+      height: 2px !important;
+      background-color: #ffffff;
+      display: block !important;
+      pointer-events: none;
+    }
+
+    // White vertical bar (plus)
+    &::after {
+      content: "" !important;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) scaleY(1) !important;
+      width: 2px !important;
+      height: 12px !important;
+      background-color: #ffffff;
+      display: block !important;
+      transition: transform 0.15s ease-in-out !important;
+      pointer-events: none;
+    }
+
+    // Collapse vertical bar to reveal minus (-)
+    &[aria-expanded="true"]::after {
+      transform: translate(-50%, -50%) scaleY(0) !important;
+    }
+  }
+
+  // 4. Clickable Overlay: Stretches the link hit area over the title
+  // Active for learners / when not inline editing
+  body:not(.editing) & {
+    .course-section .d-flex.align-items-start {
+      a.icons-collapse-expand {
+        // Expand the anchor element to visually and functionally span the row
+        .collapsed-icon {
+          display: block !important;
+          position: absolute;
+          inset: 0; // Covers top, right, bottom, left of the parent flex row
+          opacity: 0;
+          cursor: pointer;
+          z-index: 1;
+        }
+      }
+
+      .sectionname {
+        position: relative;
+        z-index: 0; // Sits behind the stretched click overlay
+      }
+    }
+  }
+
+  // 5. Revealed content spacing
+  .course-section .collapse.show,
+  .course-section .collapsing {
+    margin-top: 1rem !important;
+    padding-top: 1rem !important;
+    border-top: 1px solid #d8dde0 !important;
+  }
+}
