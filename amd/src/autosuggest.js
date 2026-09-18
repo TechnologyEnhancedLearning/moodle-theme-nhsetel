@@ -1,6 +1,6 @@
-define(['jquery'], function($) {
+define(['jquery'], function ($) {
     return {
-        init: function() {
+        init: function () {
             const searchInput = $('#search-field');
             // Ensure you have a <ul> element with this ID in your HTML,
             // typically right below the search input field.
@@ -12,7 +12,7 @@ define(['jquery'], function($) {
             // Hide the list initially
             suggestionsList.empty().hide();
 
-            searchInput.on('input', function() {
+            searchInput.on('input', function () {
                 const query = $(this).val().trim(); // Trim whitespace from the query
 
                 // Only perform search if query length is 2 or more characters
@@ -26,7 +26,7 @@ define(['jquery'], function($) {
                     url: M.cfg.wwwroot + '/theme/nhsetel/ajax/search_suggestions.php',
                     type: 'GET',
                     data: { query: query },
-                    success: function(response) {
+                    success: function (response) {
 
                         let allSuggestions = [];
 
@@ -40,8 +40,8 @@ define(['jquery'], function($) {
                                     allSuggestions.push({
                                         displayTitle: item.concept, // As per .NET code, uses item.Concept
                                         originalTermForUrl: item.concept, // Used for the actualHref for concepts
-                                        type: 'Concepts', // Matches 'Concepts' from .NET GetUrl searchType
-                                        payload: item._click.payload, // Pass the whole payload for tracking URL
+                                        type: "concepts", // Matches 'Concepts' from .NET GetUrl searchType
+                                        payload: item._click.payload, // Pass the whole payload for tracking URLcd
                                     });
                                 });
                             }
@@ -50,32 +50,30 @@ define(['jquery'], function($) {
                             // eslint-disable-next-line max-len
                             if (decodedResult.resources_collection_documents && decodedResult.resources_collection_documents.documents) {
                                 decodedResult.resources_collection_documents.documents.forEach(item => {
+
+                                    // Construct the correct course URL if the resource_type is 'course'
+                                    let itemUrl;
+                                    if (item.resource_type && item.resource_type.toLowerCase() === "course") {
+                                        // Ensure the base url has a trailing slash before appending the path
+                                        const baseUrl = item.url.endsWith('/') ? item.url : `${item.url}/`;
+                                        itemUrl = `${baseUrl}course/view.php?id=${item.resource_reference_id}`;
+                                    }
+
                                     allSuggestions.push({
                                         displayTitle: item.title,
                                         targetReferenceId: item.resource_reference_id, // Use ResourceReferenceId as per .NET GetUrl
-                                        type: 'Resource', // Matches 'Resource' from .NET GetUrl searchType
+                                        type: item.resource_type, // Matches 'Resource' from .NET GetUrl searchType
+                                        url: itemUrl,
                                         payload: item._click.payload
                                     });
                                 });
-                            }
-
-                            // Process Catalogue Documents
-                            if (decodedResult.catalogues_documents && decodedResult.catalogues_documents.documents) {
-                                decodedResult.catalogues_documents.documents.forEach(item => {
-                                    allSuggestions.push({
-                                        displayTitle: item.name, // Use 'name' for catalogues
-                                        targetReference: item.url, // Use item.Url as per .NET GetUrl
-                                        type: 'Catalogues', // Matches 'Catalogues' from .NET GetUrl searchType
-                                        payload: item._click.payload
-                                    });
-                                });
-                            }
+                            }                           
                         }
                         // Now, render the suggestion
                         if (allSuggestions.length > 0) {
                             suggestionsList.empty(); // Clear existing list items
 
-                            allSuggestions.forEach(function(item) {
+                            allSuggestions.forEach(function (item) {
                                 let actualTargetUrl = '#'; // This will be the '/Resource/ID' or '/Catalogue/name' part
                                 let typeClass = '';
                                 let subText = '';
@@ -84,7 +82,7 @@ define(['jquery'], function($) {
                                 let svgHeight = '12'; // Default
 
                                 // Determine actualTargetUrl SVG path, and dimensions based on type, mimicking the .NET GetUrl logic
-                                if (item.type === 'Resource') {
+                                if (item.type.toLowerCase() === 'resource') {
                                     if (item.targetReferenceId && item.targetReferenceId > 0) {
                                         actualTargetUrl = `/Resource/${item.targetReferenceId}`;
                                     } else {
@@ -92,7 +90,7 @@ define(['jquery'], function($) {
                                     }
                                     typeClass = 'autosugg-resource';
                                     subText = 'Learning resource';
-                                } else if (item.type === 'Catalogues') {
+                                } else if (item.type.toLowerCase() === 'catalogue') {
                                     if (item.targetReference) {
                                         actualTargetUrl = `/Catalogue/${item.targetReference}`;
                                     } else {
@@ -100,7 +98,15 @@ define(['jquery'], function($) {
                                     }
                                     typeClass = 'autosugg-catalogue';
                                     subText = 'Catalogue';
-                                } else if (item.type === 'Concepts') {
+                                } else if (item.type.toLowerCase() === 'course') {
+                                    if (item.url) {
+                                        actualTargetUrl = item.url;
+                                    } else {
+                                        actualTargetUrl = `/Search/results?term=${encodeURIComponent(item.displayTitle)}`;
+                                    }
+                                    typeClass = 'autosugg-course';
+                                    subText = 'Course';
+                                } else if (item.type.toLowerCase() === 'concepts') {
                                     actualTargetUrl = `/Search/results?term=${encodeURIComponent(item.originalTermForUrl)}`;
                                     typeClass = 'autosugg-concepts';
                                     subText = ''; // There is no subtext for Concepts
@@ -118,18 +124,18 @@ define(['jquery'], function($) {
                                 const payload = item.payload || {};
                                 /* eslint-disable max-len */
                                 const params = new URLSearchParams({
-                                term: item.displayTitle,
-                                url: actualTargetUrl,
-                                clickTargetUrl: payload.ClickTargetUrl || '',
-                                itemIndex: payload.HitNumber || '',
-                                totalNumberOfHits: (payload.SearchSignal && payload.SearchSignal.Stats && payload.SearchSignal.Stats.TotalHits) || '',
-                                containerId: payload.ContainerId || '',
-                                name: payload.DocumentFields ? payload.DocumentFields.Name : '',
-                                query: payload.SearchSignal ? payload.SearchSignal.Query : '',
-                                userQuery: payload.SearchSignal && payload.SearchSignal.UserQuery ? encodeURIComponent(payload.SearchSignal.UserQuery) : '',
-                                searchId: payload.SearchSignal ? payload.SearchSignal.SearchId : '',
-                                timeOfSearch: payload.SearchSignal ? payload.SearchSignal.TimeOfSearch : '',
-                                title: payload.DocumentFields ? payload.DocumentFields.Title : ''
+                                    term: item.displayTitle,
+                                    url: actualTargetUrl,
+                                    clickTargetUrl: payload.ClickTargetUrl || '',
+                                    itemIndex: payload.HitNumber || '',
+                                    totalNumberOfHits: (payload.SearchSignal && payload.SearchSignal.Stats && payload.SearchSignal.Stats.TotalHits) || '',
+                                    containerId: payload.ContainerId || '',
+                                    name: payload.DocumentFields ? payload.DocumentFields.Name : '',
+                                    query: payload.SearchSignal ? payload.SearchSignal.Query : '',
+                                    userQuery: payload.SearchSignal && payload.SearchSignal.UserQuery ? encodeURIComponent(payload.SearchSignal.UserQuery) : '',
+                                    searchId: payload.SearchSignal ? payload.SearchSignal.SearchId : '',
+                                    timeOfSearch: payload.SearchSignal ? payload.SearchSignal.TimeOfSearch : '',
+                                    title: payload.DocumentFields ? payload.DocumentFields.Title : ''
                                 });
                                 /* eslint-enable max-len */
 
@@ -169,7 +175,7 @@ define(['jquery'], function($) {
             });
 
             // 2. ARROW NAVIGATION: From Input to List
-            searchInput.on('keydown', function(e) {
+            searchInput.on('keydown', function (e) {
                 const items = suggestionsList.find('a');
                 if (items.length > 0 && e.key === 'ArrowDown') {
                     e.preventDefault();
@@ -178,7 +184,7 @@ define(['jquery'], function($) {
             });
 
             // 3. ARROW NAVIGATION: Within the List
-            suggestionsList.on('keydown', 'a', function(e) {
+            suggestionsList.on('keydown', 'a', function (e) {
                 const items = suggestionsList.find('a');
                 const index = items.index(this);
 
@@ -192,7 +198,7 @@ define(['jquery'], function($) {
                     }
                 } else if (e.key === 'ArrowUp') {
                     e.preventDefault();
-                   // Explicit if/else to satisfy ESLint
+                    // Explicit if/else to satisfy ESLint
                     if (index > 0) {
                         items.eq(index - 1).focus();
                     } else {
@@ -205,7 +211,7 @@ define(['jquery'], function($) {
             });
 
             // Updated Focus/Blur logic for Accessibility
-            $(document).on('focusin click', function(e) {
+            $(document).on('focusin click', function (e) {
                 // If the click or focus is NOT on the input AND NOT on a suggestion
                 if (!searchInput.is(e.target) && !suggestionsList.has(e.target).length) {
                     suggestionsList.empty().hide();
@@ -213,7 +219,7 @@ define(['jquery'], function($) {
             });
 
             // Added focus event to potentially re-show suggestions if query is still valid
-            searchInput.on('focus', function() {
+            searchInput.on('focus', function () {
                 const query = $(this).val().trim();
                 if (query.length >= 2 && suggestionsList.children().length > 0) {
                     suggestionsList.show();
