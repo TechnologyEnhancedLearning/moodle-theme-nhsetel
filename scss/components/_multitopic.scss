@@ -5,14 +5,24 @@ body.format-multitopic div#course-header>div#course-header-banner>div#course-hea
 
 body.format-multitopic #region-main {
 
+  /* Remove border from nested subsections */
+  .activity.subsection>.activity-item {
+    border: none !important;
+  }
+
   /* Section Card Container */
   li.section.course-section {
-    background-color: #f0f4f5 !important;
+    background-color: #ffffff !important;
     border: 1px solid #d8dde0 !important;
     border-radius: 4px !important;
     padding: 1.25rem !important;
     margin-bottom: 1.5rem !important;
     list-style: none;
+
+    /* Removes the border from nested subsections */
+    &.delegated-section {
+      border: none !important;
+    }
 
     .collapse.show,
     .collapsing {
