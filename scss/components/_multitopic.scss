@@ -10,6 +10,12 @@ body.format-multitopic #region-main {
     border: none !important;
   }
 
+  /* Remove vertical padding from nested subsection items */
+  .activity.subsection .section .section-item {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
   /* Section Card Container */
   li.section.course-section {
     background-color: #ffffff !important;
@@ -22,13 +28,14 @@ body.format-multitopic #region-main {
     /* Removes the border from nested subsections */
     &.delegated-section {
       border: none !important;
+      padding: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;      
     }
 
     .collapse.show,
     .collapsing {
       margin-top: 1rem !important;
-      padding-top: 1rem !important;
-      border-top: 1px solid #d8dde0 !important;
     }
   }
 
