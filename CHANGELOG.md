@@ -1,21 +1,33 @@
-# NHSE Theme change log
+# Changelog
 
-## 2024-12-02.01
-1. Footer debug tweaks
+## [v1.0.0] - 2026-09-30
 
-## 2024-10-08.01
+- Initial public release of the NHS England TEL Moodle theme
+- Established new baseline from NHS Leadership Academy fork (13 Jan 2025)
+- Upgraded to NHSUK Frontend v10.x
+- Added API-driven dynamic navigation links and search autosuggestions (API base URL configurable in theme settings)
+- Added full-screen toggle buttons for SCORM content
+- Added theme settings to toggle visibility of 'My courses' and 'Calendar' links (hidden by default)
+- Disabled sticky header to allow viewing autosuggestions on small screens
 
-1. Integrated NHSUK Frontend Framework 9.x (BOOST child theme)
-2. Moodle Boost and Bootstrap SaSS overload added (fonts and base styles)
-3. NPM scripts added for building minified CSS and changes watch (NHSUK is no longer compatible with Moodle SASS scripts)
-4. Implemented header and footer changes
-5. Fixed notifications text styling
-6. Thumbnail and favicon updates
-7. Breadcrumb tweaks
-8. Header search tweaks
+---
 
-## 2022-03-08.01
+## Legacy Leadership Academy History
 
-1. Integrated NHSUK Frontend Framework 6.x (BOOST child theme) 
-2. CSS Extended NPM scripts
-3. Integration of NHSUK Frontend and NHSE SaSS with Moodle Boost and Bootstrap (Compiled by Moodle on the fly)
+**2024-12-02.01**
+- Footer debug tweaks
+
+**2024-10-08.01**
+- Integrated NHSUK Frontend Framework 9.x (BOOST child theme)
+- Moodle Boost and Bootstrap SaSS overload added (fonts and base styles)
+- NPM scripts added for building minified CSS and changes watch (NHSUK is no longer compatible with Moodle SASS scripts)
+- Implemented header and footer changes
+- Fixed notifications text styling
+- Thumbnail and favicon updates
+- Breadcrumb tweaks
+- Header search tweaks
+
+**2022-03-08.01**
+- Integrated NHSUK Frontend Framework 6.x (BOOST child theme)
+- CSS Extended NPM scripts
+- Integration of NHSUK Frontend and NHSE SaSS with Moodle Boost and Bootstrap (Compiled by Moodle on the fly)
