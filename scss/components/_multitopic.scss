@@ -1,9 +1,86 @@
-/* Align Multitopic course header banner text to match page content layout */
+/* =========================================================================
+   Multitopic Course Format Styles
+   ========================================================================= */
+
+/* Align course header banner text to match page content layout */
 body.format-multitopic div#course-header>div#course-header-banner>div#course-header-banner-text {
   padding-left: 0;
 }
 
+/* =========================================================================
+   1. DRAWER NAVIGATION (Scrollspy & Highlights)
+   ========================================================================= */
+.format-multitopic {
+
+  /* Remove background hover state from drawer items to prevent group highlighting */
+  .courseindex .courseindex-item:has(ul):hover {
+    background-color: transparent !important;
+  }
+
+  /* Hide 'Current section' badges in drawer */
+  .courseindex .courseindex-item .badge {
+    display: none !important;
+  }
+
+  /* Add padding gutter to prevent active state bar from overlapping chevrons */
+  .courseindex .courseindex-item {
+    padding-left: 1rem !important;
+  }
+
+  /* Retain primary color and font weight for current section text */
+  .courseindex .courseindex-section.current>.courseindex-section-title .courseindex-link,
+  .courseindex .courseindex-section.current>.courseindex-section-title .courseindex-chevron {
+    color: #005eb8 !important;
+    font-weight: bold !important;
+  }
+
+  /* Remove default solid background from the current section */
+  .courseindex .is-current-section>.courseindex-item {
+    background-color: transparent !important;
+  }
+
+  /* Ensure text and icons maintain primary color in active state */
+  .courseindex .is-current-section>.courseindex-item .courseindex-link,
+  .courseindex .is-current-section>.courseindex-item .courseindex-chevron,
+  .courseindex .is-current-section>.courseindex-item i {
+    color: #005eb8 !important;
+  }
+}
+
+/* Apply gradient indicator bar for all active drawer states */
+body.format-multitopic .courseindex .courseindex-item.pageitem,
+body.format-multitopic .courseindex .courseindex-item.is-active,
+body.format-multitopic .courseindex .courseindex-item.active {
+  background: linear-gradient(to right, #005eb8 .4rem, transparent 0) !important;
+}
+
+/* Enforce primary color for active and visited drawer links */
+body.format-multitopic .courseindex .courseindex-item.pageitem .courseindex-link,
+body.format-multitopic .courseindex .courseindex-item.is-active .courseindex-link,
+body.format-multitopic .courseindex .courseindex-item.active .courseindex-link,
+body.format-multitopic .courseindex .courseindex-link:visited {
+  color: #005eb8 !important;
+}
+
+/* Prevent inherited underlines on nested elements during parent hover */
+body.format-multitopic .courseindex .courseindex-item:hover:not(:has(.courseindex-item:hover)) .courseindex-link {
+    text-decoration: none !important;
+}
+
+/* Apply text underline strictly on direct link hover */
+body.format-multitopic .courseindex .courseindex-item:hover:not(:has(.courseindex-item:hover)) .courseindex-link:hover {
+    text-decoration: underline !important;
+}
+
+/* =========================================================================
+   2. MAIN COURSE CONTENT AREA
+   ========================================================================= */
 body.format-multitopic #region-main {
+
+  /* Standardize activity indentation to match baseline layout */
+  ul.section .activity-item {
+    padding-left: 2rem !important;
+  }
 
   /* Remove border from nested subsections */
   .activity.subsection>.activity-item {
@@ -25,12 +102,12 @@ body.format-multitopic #region-main {
     margin-bottom: 1.5rem !important;
     list-style: none;
 
-    /* Removes the border from nested subsections */
+    /* Remove border and adjust margins for nested subsections */
     &.delegated-section {
       border: none !important;
       padding: 0 !important;
       margin-top: 0 !important;
-      margin-bottom: 0 !important;      
+      margin-bottom: 0 !important;
     }
 
     .collapse.show,
@@ -78,7 +155,7 @@ body.format-multitopic #region-main {
         align-items: center !important;
         cursor: pointer;
 
-        /* Section title styling */
+        /* Section title typography */
         .sectionname {
           margin-bottom: 0 !important;
           font-size: 1.1875rem !important;
@@ -98,7 +175,7 @@ body.format-multitopic #region-main {
           }
         }
 
-        /* Hover state */
+        /* Hover state typography */
         &:hover .sectionname {
 
           &,
@@ -110,7 +187,7 @@ body.format-multitopic #region-main {
         }
       }
 
-      /* NHS Focus State */
+      /* Accessibility focus state */
       &:focus-within {
         background-color: #ffeb3b !important;
         box-shadow: 0 -2px #ffeb3b, 0 4px #212b32 !important;
@@ -136,7 +213,7 @@ body.format-multitopic #region-main {
       }
     }
 
-    /* NHS 24px Circle Toggle Button */
+    /* Circular Toggle Button styling */
     a.icons-collapse-expand {
       display: inline-flex !important;
       background-color: #005eb8 !important;
@@ -146,13 +223,12 @@ body.format-multitopic #region-main {
       min-width: 1.5rem !important;
       padding: 0 !important;
       margin-right: 0.75rem !important;
-      /* Icon and text spacing */
       border: none !important;
       outline: none !important;
       box-shadow: none !important;
       z-index: 2 !important;
 
-      /* Draw the plus (+) icon directly on the link background */
+      /* Render plus (+) icon using CSS gradients */
       background-image:
         linear-gradient(#ffffff, #ffffff),
         linear-gradient(#ffffff, #ffffff) !important;
@@ -172,7 +248,7 @@ body.format-multitopic #region-main {
         display: none !important;
       }
 
-      /* Change to minus (-) when expanded */
+      /* Transform to minus (-) icon when expanded */
       &[aria-expanded="true"] {
         background-size: 10px 2px, 2px 0px !important;
       }
@@ -197,10 +273,9 @@ body.format-multitopic #region-main {
           /* Enforce primary color and override default visited state */
           text-decoration: underline !important;
           text-underline-offset: 3px !important;
-          /* Standardize underline offset */
           font-weight: 700 !important;
 
-          /* Hover state styling */
+          /* Hover state typography */
           &:hover {
             color: #7c2855 !important;
             text-decoration: none !important;
