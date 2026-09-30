@@ -17,14 +17,18 @@
 /**
  * Language file.
  *
- * @package   theme_nhse
+ * @package   theme_nhsetel
  * @copyright NHS England
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['admin_url_setting']                           = 'LH Admin URL';
+$string['admin_url_setting_desc']                      = 'The full URL for the Learning Hub Admin page. This will be used to populate the Admin link URL.';
 $string['advancedsettings']                            = 'Advanced settings';
+$string['api_base_url_setting']                        = 'LH OpenAPI Base URL';
+$string['api_base_url_setting_desc']                   = 'The base URL for the Learning Hub OpenAPI (e.g., https://lh-openapi.dev.local). This will be used to fetch user navigation data.';
 $string['backgroundimage']                             = 'Background image';
 $string['backgroundimage_desc']                        = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
 $string['bcsettings']                                  = 'Breadcrumb settings';
@@ -44,6 +48,8 @@ $string['copyright_default']                           = 'NHS England';
 $string['cookiesnotice']                               = 'Read our cookies notice';
 $string['cookiesenabled']                              = 'Cookies must be enabled in your browser';
 $string['currentinparentheses']                        = '(current)';
+$string['dotnet_base_url_setting']                     = '.NET Application Base URL';
+$string['dotnet_base_url_setting_desc']                = 'The base URL for your .NET application (e.g., https://lh-web.dev.local). Relative links received from the API will be prepended with this URL if they are not absolute.';
 $string['fontsize']                                    = 'Theme base fontsize';
 $string['fontsize_desc']                               = 'Enter a fontsize in %';
 $string['footersettings']                              = 'Footer settings';
@@ -75,7 +81,7 @@ $string['login_expand_text_default']                   = 'Other Login';
 $string['loginguest']                                  = 'Continue as a guest';
 $string['login_oauth_with']                            = 'Log in with';
 $string['nobootswatch']                                = 'None';
-$string['pluginname']                                  = 'NHSE';
+$string['pluginname']                                  = 'NHS England TEL';
 $string['preset']                                      = 'Theme preset';
 $string['preset_desc']                                 = 'Pick a preset to broadly change the look of the theme.';
 $string['presetfiles']                                 = 'Additional theme preset files';
@@ -97,7 +103,21 @@ $string['rawscsspre_desc']                             = 'In this field you can 
 $string['region-side-pre']                             = 'Right';
 $string['region-contenttop']                           = 'Top of Main Content Area';
 $string['region-contentbottom']                        = 'Bottom of Main Content Area';
+$string['scormsettings']                               = 'SCORM Resource Settings';
+$string['scormsettingsdesc']                           = 'Configure specific settings for SCORM resources.';
+$string['scormfullscreenbutton']                       = 'Include Full Screen Button';
+$string['scormfullscreenbutton_desc']                  = 'Should a button be displayed to allow SCORM resources to be viewed in full screen?';
 $string['showfooter']                                  = 'Show footer';
 $string['unaddableblocks']                             = 'Unneeded blocks';
 $string['unaddableblocks_desc']                        = 'The blocks specified are not needed when using this theme and will not be listed in the \'Add a block\' menu.';
 $string['title']                                       = 'Title';
+// Navigation settings
+$string['navsettings'] = 'Navigation Settings';
+$string['mycourses_toggle'] = 'Show "My courses" link';
+$string['mycourses_toggle_desc'] = 'Toggle whether the "My courses" link is displayed in the main navigation header.';
+$string['mycourses_text'] = '"My courses" link text';
+$string['mycourses_text_desc'] = 'The text to display for the "My courses" link. Leave blank to use the default "My courses".';
+$string['calendar_toggle'] = 'Show "Calendar" link';
+$string['calendar_toggle_desc'] = 'Toggle whether the "Calendar" link is displayed in the main navigation header.';
+$string['calendar_text'] = '"Calendar" link text';
+$string['calendar_text_desc'] = 'The text to display for the "Calendar" link. Leave blank to use the default "Calendar".';

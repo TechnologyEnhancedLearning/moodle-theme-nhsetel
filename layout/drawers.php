@@ -61,7 +61,20 @@ if (!$courseindex) {
 }
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
+// $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
+
+// Manually inject the required class into the compiled string.
+$required_class = 'nhsuk-frontend-supported';
+
+if (strpos($bodyattributes, 'class="') !== false) {
+    // If a class attribute already exists, insert the new class before the closing quote.
+    $bodyattributes = str_replace('class="', 'class="' . $required_class . ' ', $bodyattributes);
+} else {
+    // If no class attribute exists, find the first attribute (e.g., id="...")
+    // and insert the class attribute immediately after it.
+    // This is a simple append for safety, assuming the body attributes start with id="...".
+    $bodyattributes .= ' class="' . $required_class . '"';
+}
 
 $secondarynavigation = false;
 $overflow = '';
@@ -99,7 +112,7 @@ $templatecontext = [
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
     'usermenu' => $primarymenu['user'],
     'langmenu' => $primarymenu['lang'],
-    'forceblockdraweropen' => $forceblockdraweropen,
+    // 'forceblockdraweropen' => $forceblockdraweropen,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'overflow' => $overflow,
@@ -107,7 +120,31 @@ $templatecontext = [
     'addblockbutton' => $addblockbutton
 ];
 
-// Include NHSUK Frontend js file
-$PAGE->requires->js(new moodle_url($CFG->wwwroot . '/theme/nhse/node_modules/nhse-tel-frontend/dist/nhsuk.min.js'));
+// Load custom initialization module as an ES Module.
+$init_url = new moodle_url($CFG->wwwroot . '/theme/nhsetel/javascript/nhsuk-init-module.js');
 
-echo $OUTPUT->render_from_template('theme_nhse/drawers', $templatecontext);
+// This forces the necessary type="module" attribute and correctly loads the initializer.
+echo '<script src="' . $init_url . '" type="module"></script>'; 
+
+// Example of the final line that must follow:
+// echo $OUTPUT->render_from_template('theme_nhsetel/drawers', $templatecontext);
+
+error_log('Current PAGE URL: ' . $PAGE->url->out());
+if (strpos($PAGE->url->out(), '/mod/scorm/player.php') !== false) {
+
+     // Access the theme settings
+    $theme_settings = theme_config::load('nhsetel'); // Replace 'nhsetel' with your theme's shortname
+
+    error_log('theme_settings object: ' . print_r($theme_settings, true));
+
+     // Check the value of your boolean setting
+    if (!empty($theme_settings->settings->scormfullscreenbutton)) {
+        // If the setting is enabled (typically stored as '1'), load the JavaScript
+        $PAGE->requires->js('/theme/nhsetel/javascript/scorm-fullscreen.js.php');
+        error_log('Attempting to load /theme/nhsetel/javascript/scorm-fullscreen.js.php (scormfullscreenbutton is NOT empty)');
+    } else {
+        error_log('scormfullscreenbutton is empty or not set.');
+    }
+}
+
+echo $OUTPUT->render_from_template('theme_nhsetel/drawers', $templatecontext);

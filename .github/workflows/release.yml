@@ -3,7 +3,11 @@ name: Create new release
 on:
   push:
     tags:
-      - '20[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+      - '[0-9]+.[0-9]+.[0-9]+*'
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -23,12 +27,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Get package version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-
       - name: Create artifact
-        run: zip -r ${{ steps.get_version.outputs.VERSION }}.zip . -x '.github**' -x '.git**' -x '.gitignore' -x '.gitattributes'
+        run: zip -r ${{ github.ref_name }}.zip . -x '.github**' -x '.git**' -x '.gitignore' -x '.gitattributes'
 
       - name: Create release
         id: create_release
@@ -36,8 +36,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ${{ steps.get_version.outputs.VERSION }}.zip
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          name: ${{ steps.get_version.outputs.VERSION }}
+          files: ${{ github.ref_name }}.zip
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
           draft: false
-          prerelease: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
