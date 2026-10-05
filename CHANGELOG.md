@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.1] - 2026-10-05
+
+- Fixed shared template logic to resolve UI rendering issues preventing the CK Editor and resource search components from displaying correctly.
+
 ## [v1.0.0] - 2026-09-30
 
 - Initial public release of the NHS England TEL Moodle theme
