@@ -81,3 +81,14 @@ td {
     font-size: 1.0rem;
   }
 }
+
+/* page content heading and paragraph vertical spacing */
+#page-content h1,
+#page-content h2,
+#page-content h3, 
+#page-content h4, 
+#page-content h5,
+#page-content h6,
+#page-content p {
+  margin-bottom: 1rem;
+}
