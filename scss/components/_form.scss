@@ -1,43 +1,19 @@
 /* ==========================================================================
-// DOUBLE SIZED CHECKBOXES
+// ENLARGED SIZE CHECKBOXES FOR BETTER VISIBILITY
 // ========================================================================== */
 
 input[type=checkbox] {
-  -ms-transform: scale(2);
-  /* IE */
-  -moz-transform: scale(2);
-  /* FF */
-  -webkit-transform: scale(2);
-  /* Safari and Chrome */
-  -o-transform: scale(2);
-  /* Opera */
-  transform: scale(2);
+  width: 1.5rem;  
+  height: 1.5rem; 
+  vertical-align: middle; 
+  margin-top: -0.15rem; /* Minor optical adjustment for vertical centering */
+  margin-right: 0.5rem; /* Universal breathing room for labels or adjacent text */
 }
 
-label input[type=checkbox] {
-  margin-right: 1.0rem !important;
-}
-
-.form-check label {
-  padding-left: 1.0rem !important;
-}
-
-.form-check-inline .form-check-input {
-  margin-left: 1.0rem;
-  margin-right: 1.0rem;
-}
 
 .form-control {
   padding: 0 0.75rem;
   border-radius: 0;
-}
-
-.form-item {
-  .form-setting {
-    .form-defaultinfo {
-      padding-left: 1rem;
-    }
-  }
 }
 
 .custom-select {
