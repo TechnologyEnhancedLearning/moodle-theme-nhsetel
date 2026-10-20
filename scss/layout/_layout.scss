@@ -189,7 +189,8 @@ body.lockscroll {
   body.limitedwidth.pagelayout-mycourses #page.drawers .main-inner,
   body.pagelayout-incourse #page.drawers .main-inner,
   body.pagelayout-admin #page.drawers .main-inner,
-  body.pagelayout-report #page.drawers .main-inner {
+  body.pagelayout-report #page.drawers .main-inner,
+  body.pagelayout-mypublic #page.drawers .main-inner {
     max-width: unset;
   }
 }
@@ -205,7 +206,8 @@ body.lockscroll {
   body.pagelayout-mycourses #page.drawers:not(.show-drawer-left),
   body.pagelayout-incourse #page.drawers:not(.show-drawer-left),
   body.pagelayout-admin #page.drawers:not(.show-drawer-left),
-  body.pagelayout-report #page.drawers:not(.show-drawer-left) {
+  body.pagelayout-report #page.drawers:not(.show-drawer-left),
+  body.pagelayout-mypublic #page.drawers:not(.show-drawer-left) {
     padding-left: 0;
   }
 }
@@ -220,7 +222,8 @@ body.lockscroll {
   body.pagelayout-mycourses #page.drawers,
   body.pagelayout-incourse #page.drawers,
   body.pagelayout-admin #page.drawers,
-  body.pagelayout-report #page.drawers {
+  body.pagelayout-report #page.drawers,
+  body.pagelayout-mypublic #page.drawers {
     padding-right: 0;
   }
 }
@@ -251,7 +254,8 @@ body.limitedwidth.pagelayout-course #page.drawers .main-inner,
 body.limitedwidth.pagelayout-mycourses #page.drawers .main-inner,
 body.pagelayout-incourse #page.drawers .main-inner,
 body.pagelayout-admin #page.drawers .main-inner,
-body.pagelayout-report #page.drawers .main-inner {
+body.pagelayout-report #page.drawers .main-inner,
+body.pagelayout-mypublic #page.drawers .main-inner {
   border-radius: 0;
 }
 
