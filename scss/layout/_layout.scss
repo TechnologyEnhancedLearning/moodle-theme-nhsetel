@@ -275,12 +275,6 @@ body.pagelayout-standard #page.drawers .main-inner {
     padding-left: 2rem !important;
     padding-right: 1rem !important;
   }
-
-  /* Override State: Drawer is OPEN (5rem) */
-  /* This provides breathing room between the lhs drawer and the content  */
-  /* #page.show-drawer-left .main-inner { */
-  /*   padding-left: 5rem !important; */
-  /* } */
 }
 
 /* When the screen narrows (below 1200px), the 2.5rem left padding 
