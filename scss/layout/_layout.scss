@@ -190,7 +190,8 @@ body.lockscroll {
   body.pagelayout-incourse #page.drawers .main-inner,
   body.pagelayout-admin #page.drawers .main-inner,
   body.pagelayout-report #page.drawers .main-inner,
-  body.pagelayout-mypublic #page.drawers .main-inner {
+  body.pagelayout-mypublic #page.drawers .main-inner,
+  body.pagelayout-standard #page.drawers .main-inner {
     max-width: unset;
   }
 }
@@ -207,7 +208,8 @@ body.lockscroll {
   body.pagelayout-incourse #page.drawers:not(.show-drawer-left),
   body.pagelayout-admin #page.drawers:not(.show-drawer-left),
   body.pagelayout-report #page.drawers:not(.show-drawer-left),
-  body.pagelayout-mypublic #page.drawers:not(.show-drawer-left) {
+  body.pagelayout-mypublic #page.drawers:not(.show-drawer-left),
+  body.pagelayout-standard #page.drawers:not(.show-drawer-left) {
     padding-left: 0;
   }
 }
@@ -223,7 +225,8 @@ body.lockscroll {
   body.pagelayout-incourse #page.drawers,
   body.pagelayout-admin #page.drawers,
   body.pagelayout-report #page.drawers,
-  body.pagelayout-mypublic #page.drawers {
+  body.pagelayout-mypublic #page.drawers,
+  body.pagelayout-standard #page.drawers {
     padding-right: 0;
   }
 }
@@ -255,7 +258,8 @@ body.limitedwidth.pagelayout-mycourses #page.drawers .main-inner,
 body.pagelayout-incourse #page.drawers .main-inner,
 body.pagelayout-admin #page.drawers .main-inner,
 body.pagelayout-report #page.drawers .main-inner,
-body.pagelayout-mypublic #page.drawers .main-inner {
+body.pagelayout-mypublic #page.drawers .main-inner,
+body.pagelayout-standard #page.drawers .main-inner {
   border-radius: 0;
 }
 
@@ -270,12 +274,6 @@ body.pagelayout-mypublic #page.drawers .main-inner {
   body.pagelayout-report #page-wrapper #page .main-inner {
     padding-left: 2rem !important;
     padding-right: 1rem !important;
-  }
-
-  /* Override State: Drawer is OPEN (5rem) */
-  /* This provides breathing room between the lhs drawer and the content  */
-  #page.show-drawer-left .main-inner {
-    padding-left: 5rem !important;
   }
 }
 

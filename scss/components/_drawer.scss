@@ -190,11 +190,18 @@
   // This allows the content and drawer to flow naturally, ensuring the footer 
   // is correctly pushed by the total page height rather than being trapped 
   // by a viewport-locked container.
+  // Force main content container to bypass fixed-height/sticky constraints 
+  // across all site page layouts.
   body.pagelayout-course,
   body.pagelayout-incourse,
   body.pagelayout-report,
   body.pagelayout-admin,
-  body.pagelayout-base {
+  body.pagelayout-base,
+  body.pagelayout-frontpage,
+  body.pagelayout-coursecategory,
+  body.pagelayout-mycourses,
+  body.pagelayout-mypublic,
+  body.pagelayout-standard {
     .nhs-main-layout #page {
       height: auto !important;
       overflow: visible !important;
