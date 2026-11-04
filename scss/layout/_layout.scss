@@ -333,3 +333,28 @@ body.pagelayout-admin #page.drawers .main-inner header .header-maxwidth {
 div[role="alertdialog"].modal-in-page {
   height: auto !important;
 }
+
+/* ==========================================================================
+// RHS DRAWER (Full-Height 100vh Slide-Over Panel)
+// ========================================================================== */
+
+@media (min-width: 992px) {  
+  .drawer.drawer-right.show {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    box-sizing: border-box !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+    z-index: 1060 !important;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Prevent content from squishing when the drawer opens */
+  body:has(#page.show-drawer-right) #page-wrapper,
+  body:has(#page.show-drawer-right) #page.drawers {
+    padding-right: 0 !important;
+    margin-right: auto !important;
+  }
+}

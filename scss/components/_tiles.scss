@@ -1,0 +1,4 @@
+/* Prevent Tiles course format plugin causing a double vertical scrollbar */
+body#page-course-view-tiles.format-tiles { 
+  overflow-y: auto !important;
+}
