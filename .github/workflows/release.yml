@@ -27,6 +27,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Fetch Moodle Boost dependency
+        run: |
+          mkdir -p ../boost
+          git clone --depth 1 --branch MOODLE_404_STABLE https://github.com/moodle/moodle.git /tmp/moodle
+          cp -r /tmp/moodle/theme/boost/* ../boost/
+          rm -rf /tmp/moodle
+
       - name: Compile assets
         run: npm run build
 
