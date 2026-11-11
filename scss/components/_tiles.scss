@@ -2,3 +2,11 @@
 body#page-course-view-tiles.format-tiles { 
   overflow-y: auto !important;
 }
+
+/* Force override of inline JS styles on the Tiles overlay to ensure the overlay is 100% of the page height */
+#page #format_tiles_overlay {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    bottom: 0 !important;  
+}
