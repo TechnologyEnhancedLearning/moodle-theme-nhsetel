@@ -3,8 +3,15 @@
    ========================================================================= */
 
 /* Align course header banner text to match page content layout */
-body.format-multitopic div#course-header>div#course-header-banner>div#course-header-banner-text {
-  padding-left: 0;
+body.format-multitopic div#course-header > div#course-header-banner {
+  > div#course-header-banner-text {
+    padding-left: 0;
+  }
+
+  /* Add breathing space for text that appears on top of image when a course image is present */
+  &[style*="url("] > div#course-header-banner-text {
+    padding-left: 1.5rem;
+  }
 }
 
 /* =========================================================================
