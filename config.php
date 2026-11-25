@@ -50,6 +50,7 @@ $THEME->parents = ['boost'];
 $THEME->regions = [];
 $THEME->sheets = [];
 $THEME->editor_sheets = [];
+$THEME->javascripts = ['drawer-scroll-fix'];
 $THEME->editor_scss = ['editor'];
 $THEME->usefallback = true;
 
