@@ -97,24 +97,6 @@
   }
 }
 
-// --- Course View Specific Overrides (Disable scroll highlighting) ---
-.path-course-view .courseindex {
-  // Target active classes to suppress JS scroll highlighting
-  .courseindex-item.pageitem,
-  .courseindex-item.is-active,
-  .courseindex-item.active {
-    background: transparent !important;
-    background-color: transparent !important;
-    color: #005eb8 !important;
-    font-weight: normal !important;
-
-    a.courseindex-link {
-      background-color: transparent !important;
-      color: #005eb8 !important;
-    }
-  }
-}
-
 // ==========================================================================
 // 3. DESKTOP LAYOUT & STICKY DRAWER (Large Screens +)
 // ==========================================================================
@@ -157,31 +139,47 @@
 
     // Sticky LHS drawer (Active State)
     .nhs-static-drawer.show {
-      display: block !important;
-      visibility: visible !important;    
+      display: flex !important;
+      flex-direction: column !important;
+      visibility: visible !important;
       position: sticky !important;
       top: 0px !important;
-      z-index: 1 !important; // Lowers sticky layer below dropdown menus
+      z-index: 1 !important;
       min-width: 285px !important;
       max-width: 285px !important;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
+      height: auto !important;
+      max-height: calc(100vh - var(--header-height, 135px)) !important;
+      overflow: clip !important; // Prevents JS scrollIntoView() from shifting the outer drawer
       transform: none !important;
       transition: none !important;
+
+      // Bottom & right edge styling
       background-color: #f8f9fa;
-      height: auto !important;
+      border-right: 1px solid #d8dde0;
+      border-bottom: 1px solid #d8dde0;
+      border-bottom-right-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
       .drawer-header {
         display: flex !important;
-        height: 60px; // Match actual header height
+        flex-shrink: 0 !important; // Keeps the close button pinned at the top
+        height: 60px;
         min-height: 60px;
         margin-top: 1rem;
-        
-        // Vertically centre the close button
+
         .drawertoggle {
           display: inline-flex;
           align-items: center;
         }
+      }
+
+      .drawercontent {
+        min-height: 0 !important;        // Allows the flex child to shrink and scroll
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        overscroll-behavior: contain;
+        flex: 1 1 auto !important;
+        padding-bottom: 0.75rem;
       }
     }
   }
